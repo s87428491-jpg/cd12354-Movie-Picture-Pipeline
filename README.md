@@ -109,7 +109,7 @@ Add these repository secrets under **Settings > Secrets and variables > Actions 
 Add these repository variables under **Settings > Secrets and variables > Actions > Variables**:
 
 - `AWS_REGION` (for example, `us-east-1`)
-- `EKS_CLUSTER_NAME` (for example, `cluster`)
+- `EKS_CLUSTER_NAME` (for example, `movie-cluster`)
 - `MOVIE_API_URL` set to the externally reachable backend LoadBalancer URL, without a trailing slash (for example, `http://<backend-load-balancer-hostname>`)
 
 The ECR repository variables are optional; the workflows default to the Terraform repository names `frontend` and `backend`. Once the backend has deployed, get its public URL with `kubectl get service backend` and set `MOVIE_API_URL` before deploying the frontend. The frontend build embeds this value, so redeploy the frontend whenever the backend URL changes.

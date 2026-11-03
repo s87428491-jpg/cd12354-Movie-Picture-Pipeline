@@ -13,7 +13,7 @@ permissions:
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION || 'us-east-1' }}
-  EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME || 'cluster' }}
+  EKS_CLUSTER_NAME: ${{ vars.EKS_CLUSTER_NAME || 'movie-cluster' }}
   ECR_REPOSITORY: ${{ vars.FRONTEND_ECR_REPOSITORY || 'frontend' }}
 
 jobs:
