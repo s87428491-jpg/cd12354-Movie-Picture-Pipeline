@@ -99,6 +99,23 @@ cd setup
 
 2. The script will download a tool, add the IAM user ARN to the authentication configuration, indicate a `Done` status, then it'll remove the tool
 
+### Configure GitHub Actions
+
+Add these repository secrets under **Settings > Secrets and variables > Actions > Secrets**:
+
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+Add these repository variables under **Settings > Secrets and variables > Actions > Variables**:
+
+- `AWS_REGION` (for example, `us-east-1`)
+- `EKS_CLUSTER_NAME` (for example, `cluster`)
+- `MOVIE_API_URL` set to the externally reachable backend LoadBalancer URL, without a trailing slash (for example, `http://<backend-load-balancer-hostname>`)
+
+The ECR repository variables are optional; the workflows default to the Terraform repository names `frontend` and `backend`. Once the backend has deployed, get its public URL with `kubectl get service backend` and set `MOVIE_API_URL` before deploying the frontend. The frontend build embeds this value, so redeploy the frontend whenever the backend URL changes.
+
+The workflows run CI for pull requests to `main` and CD for pushes to `main`; each can also be started from the Actions tab with **Run workflow**. After deployment, open the `frontend` LoadBalancer URL from `kubectl get service frontend` and confirm the movie list appears. For submission, include successful workflow run links and the working frontend URL (or a screenshot showing the loaded movie list); include the backend `/movies` URL or a screenshot of its JSON response as well.
+
 ## Dependencies
 
 We've provided the below list of dependencies to assist in the case you'd like to run any of the work locally. Local development issues, however, are not supported as we cannot control the environment as we can in the online workspace.
